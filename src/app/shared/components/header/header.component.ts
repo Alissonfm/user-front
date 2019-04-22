@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '@app/shared/service/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +10,21 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authSvc: AuthenticationService
   ) { }
 
   ngOnInit() {
   }
 
   goTo(url: string){
-    this.router.navigateByUrl(url);
+    this.router.navigate([url]);
+  }
+
+  logout(){
+    if(this.authSvc.logout()){
+      this.router.navigateByUrl('');
+    };
   }
 
 }

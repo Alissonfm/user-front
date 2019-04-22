@@ -22,11 +22,17 @@ export class AuthenticationService {
         this.user = data;
     }
 
+    private getUser(){
+        return JSON.parse(localStorage.getItem('currentUser'));
+    }
+
     private eraseUser(){
         if(localStorage.getItem('currentUser') != undefined ){
             localStorage.removeItem('currentUser');
             this.user = undefined;
+            return true;
         }
+        return false;
     }
 
     check() {
@@ -41,6 +47,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string, onSuccess, onFail) {
+
         let $this = this;
         let tempUser: User = new User();
         tempUser.login = username;
@@ -64,50 +71,6 @@ export class AuthenticationService {
     };
 
     logout() {
-        this.eraseUser();
+        return this.eraseUser();
     }
 }
-
-
-/*
-@Injectable({ 
-  providedIn: 'root' 
-})
-export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
-
-    constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUser = this.currentUserSubject.asObservable();
-    }
-
-    public get currentUserValue(): User {
-        return this.currentUserSubject.value;
-    }
-
-    login(username: string, password: string) {
-        console.log(`${environment.baseUrl}/users/authenticate`);
-        let user = new User();
-        user.password = password;
-        user.login = username;
-        return this.http.post<any>(`${environment.baseUrl}/users/authenticate`, user)
-            .pipe(map(user => {
-                // login successful if there's a jwt token in the response
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
-                }
-
-                return user;
-        }));
-    }
-
-    logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
-    }
-}
-*/

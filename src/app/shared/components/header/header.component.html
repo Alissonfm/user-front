@@ -6,22 +6,27 @@
       <a mat-button (click)="goTo('/enderecos/listar')" > Listar Endereços </a>
       <a mat-button (click)="goTo('/tipos-enderecos/listar')" > Listar Tipos de Endereços </a>
     -->
-      <button mat-button [matMenuTriggerFor]="menu"> Pessoas </button>
-      <mat-menu #menu="matMenu">
+      <button mat-button [matMenuTriggerFor]="menuPessoas"> Pessoas </button>
+      <mat-menu #menuPessoas="matMenu">
         <button (click)="goTo('pessoas/adicionar')" mat-menu-item> Cadastrar novo </button>
         <button (click)="goTo('pessoas/listar')" mat-menu-item> Buscar </button>
       </mat-menu>
 
-      <button mat-button [matMenuTriggerFor]="menu"> Endereços </button>
-      <mat-menu #menu="matMenu">
+      <button mat-button [matMenuTriggerFor]="menuEnderecos"> Endereços </button>
+      <mat-menu #menuEnderecos="matMenu">
         <button (click)="goTo('enderecos/adicionar')" mat-menu-item> Cadastrar novo </button>
         <button (click)="goTo('enderecos/listar')" mat-menu-item> Buscar </button>
       </mat-menu>
       
-      <button mat-button [matMenuTriggerFor]="menu"> Tipos de endereços </button>
-      <mat-menu #menu="matMenu">
+      <button mat-button [matMenuTriggerFor]="menuTiposEnderecos"> Tipos de endereços </button>
+      <mat-menu #menuTiposEnderecos="matMenu">
         <button (click)="goTo('tipos-enderecos/adicionar')" mat-menu-item> Cadastrar novo </button>
         <button (click)="goTo('tipos-enderecos/listar')" mat-menu-item> Buscar </button>
       </mat-menu>
+
+      <div class="float-right">
+        <button mat-button (click)="logout()" > Sair </button>
+      </div>
+
   </div>
 </mat-toolbar>

@@ -7,27 +7,33 @@ import { Routes, RouterModule } from '@angular/router';
 import { LocalService } from '@app/shared/service/local.service';
 import { AddressModule } from './address/address.module';
 import { TypeAddressModule } from './type-address/type-address.module';
+import { AuthGuard } from '@app/core/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'app',
     component: PagesComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'enderecos',
-        component: AddressModule
+        component: AddressModule,
+        canActivate: [AuthGuard],
       },
       {
         path: 'pessoas',
-        component: PeopleModule
+        component: PeopleModule,
+        canActivate: [AuthGuard],
       },
       {
         path: 'tipos-enderecos',
-        component: TypeAddressModule
+        component: TypeAddressModule,
+        canActivate: [AuthGuard],
       },
 
     ]

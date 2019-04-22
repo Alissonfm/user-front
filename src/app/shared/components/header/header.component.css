@@ -11,3 +11,10 @@ mat-toolbar {
 mat-toolbar * {
     color: white;
 }
+
+.float-right {
+    float: right;
+    position: relative;
+    width: auto;
+    height: auto;
+}

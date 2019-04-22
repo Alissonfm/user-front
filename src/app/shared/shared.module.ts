@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ListComponent } from './components/list/list.component';
-import { DialogEditorComponent } from './components/dialog-editor/dialog-editor.component';
 import {
 	MatButtonModule,
 	MatFormFieldModule,
@@ -30,7 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [ListComponent, DialogEditorComponent, HeaderComponent],
+  declarations: [HeaderComponent],
   imports: [
     MatButtonModule,
     MatFormFieldModule,
@@ -62,8 +60,6 @@ import { HeaderComponent } from './components/header/header.component';
     //BrowserAnimationsModule,
   ],
   exports: [
-    ListComponent, 
-    DialogEditorComponent,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
