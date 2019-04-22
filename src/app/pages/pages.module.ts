@@ -6,6 +6,7 @@ import { PeopleModule } from './people/people.module';
 import { Routes, RouterModule } from '@angular/router';
 import { LocalService } from '@app/shared/service/local.service';
 import { AddressModule } from './address/address.module';
+import { TypeAddressModule } from './type-address/type-address.module';
 
 
 const routes: Routes = [
@@ -43,7 +44,8 @@ const routes: Routes = [
     SharedModule, 
     PeopleModule,
     AddressModule,
-    RouterModule
+    TypeAddressModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     LocalService,

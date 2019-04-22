@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TypeAddressComponent, ListComponent, CreateEditComponent],
+  declarations: [ListComponent, CreateEditComponent, TypeAddressComponent],
   imports: [
     SharedModule,
     RouterModule.forChild(routes)

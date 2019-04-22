@@ -7,6 +7,7 @@ import { PagesModule } from './pages/pages.module';
 import { PagesComponent } from './pages/pages.component';
 import { PeopleModule } from '@pages/people/people.module';
 import { AddressModule } from '@pages/address/address.module';
+import { TypeAddressModule } from './pages/type-address/type-address.module';
 
 const API_ROUTES: Routes = [
   {
@@ -84,7 +85,7 @@ const API_ROUTES: Routes = [
 */
 
 @NgModule({
-  imports: [PagesModule, PeopleModule, AddressModule, RouterModule.forRoot(API_ROUTES)],
+  imports: [PagesModule, PeopleModule, AddressModule, TypeAddressModule, RouterModule.forRoot(API_ROUTES)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
