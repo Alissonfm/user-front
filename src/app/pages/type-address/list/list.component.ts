@@ -23,7 +23,7 @@ export class ListComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<any>;
 
   nomeFilterTxt = "";
-  statusFilterTxt = "Todos";
+  statusfilterTxt = "Todos";
 
   statusFilterOpts = [
     { value: true, viewValue: "Todos"},
@@ -77,11 +77,18 @@ export class ListComponent implements OnInit {
     this.exportSvc.exportAsExcelFile(this.dataSource, "enderecos");
   }
 
+  filterStatusChange(e){
+    this.statusfilterTxt = e;
+    console.log(e);
+  }
+
   verTodosOsRetistros(){
     this.hideTable = false;
+    this.dataSourceFiltrado = undefined;
     this.taSvc.getAll().subscribe(
       (response) => {
         this.dataSource = response;
+        this.dataSourceBkp = response;
         this.table.renderRows();
       }
     )
@@ -90,10 +97,8 @@ export class ListComponent implements OnInit {
   filtrar(){
     console.log("Data source inicial:");
     console.log(this.dataSource);
-    console.log(this.nomeFilterTxt);
 
     let $this = this;
-    this.limparFiltro();
     this.hideTable = true;
 
     if(this.nomeFilterTxt != ""){
@@ -112,11 +117,11 @@ export class ListComponent implements OnInit {
     console.log("Filtro de nome");
     console.log(this.dataSourceFiltrado);
 
-    if(this.statusFilterTxt != "Todos"){
+    if(this.statusfilterTxt != "Todos"){
       this.dataSourceFiltrado = this.loopWithReturn(
         this.dataSource, 
         (element) => {
-          if( element.active == $this.statusFilterTxt ){
+          if( element.active == $this.statusfilterTxt ){
             return element;
           }
           return undefined;
@@ -140,14 +145,7 @@ export class ListComponent implements OnInit {
     this.hideTable = false;
   }
 
-  limparFiltro(){
-    this.dataSource = this.dataSourceBkp;
-    this.dataSourceFiltrado = undefined;
-    this.table.renderRows();
-  }
-
-  loopWithReturn(array: Array<any>, callback: any){
-    console.log(array);
+  loopWithReturn(array: any, callback: any){
     let arr = [];
     let retorno: any;
     for(let i=0; i < array.length; i++){

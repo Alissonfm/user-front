@@ -13,6 +13,10 @@ import { ExportServiceService } from '@app/shared/service/export-service.service
 export class ListComponent implements OnInit {
 
   dataSource: any;
+  dataSourceBkp: any;
+  dataSourceFiltrado: any;
+  hideTable: boolean = true;
+
   columnsToDisplay = [
     'name',
     'document',
@@ -27,6 +31,15 @@ export class ListComponent implements OnInit {
     'edit',
     'delete'
   ];
+
+  peopletTypeFilterOpts = [
+    { value: "F", viewValue: "Todos"},
+    { value: "F", viewValue: "Pessoa Física"},
+    { value: "J", viewValue: "Pessoa Jurídica"}
+  ];
+
+  nomeFilterTxt = "";
+  statusfilterTxt = "Todos";
 
   @ViewChild(MatTable) table: MatTable<any>;
 
@@ -66,6 +79,85 @@ export class ListComponent implements OnInit {
 
   exportar(){
     this.exportSvc.exportAsExcelFile(this.dataSource, "pessoas");
+  }
+
+  filterStatusChange(e){
+    this.statusfilterTxt = e;
+    console.log(e);
+  }
+
+  verTodosOsRetistros(){
+    this.hideTable = false;
+    this.dataSourceFiltrado = undefined;
+    this.peopleSvc.getAll().subscribe(
+      (response) => {
+        this.dataSource = response;
+        this.table.renderRows();
+      }
+    )
+  }
+
+  filtrar(){
+    console.log("Data source inicial:");
+    console.log(this.dataSource);
+
+    let $this = this;
+    this.hideTable = true;
+
+    if(this.nomeFilterTxt != ""){
+      this.dataSourceFiltrado = this.loopWithReturn(
+        this.dataSource, 
+        (element) => {
+          let rg = new RegExp($this.nomeFilterTxt, "gi");
+          if( rg.test(element.name) ){
+            return element;
+          }
+          return undefined;
+        }
+      );
+    }
+
+    console.log("Filtro de nome");
+    console.log(this.dataSourceFiltrado);
+
+    if(this.statusfilterTxt != "Todos"){
+      this.dataSourceFiltrado = this.loopWithReturn(
+        this.dataSource, 
+        (element) => {
+          if( element.peopleType == $this.statusfilterTxt ){
+            return element;
+          }
+          return undefined;
+        }
+      );
+    }
+
+    console.log("Filtro de status");
+    console.log(this.dataSourceFiltrado);
+
+    if(this.dataSourceFiltrado != undefined ) {
+      this.dataSource = this.dataSourceFiltrado;
+      this.table.renderRows();
+    } else {
+      this.dataSource = this.dataSourceBkp;
+      this.table.renderRows();
+    }
+
+    console.log("Data Source final:");
+    console.log(this.dataSource);
+    this.hideTable = false;
+  }
+
+  loopWithReturn(array: any, callback: any){
+    let arr = [];
+    let retorno: any;
+    for(let i=0; i < array.length; i++){
+      retorno = callback(array[i]);
+      if(retorno) {
+        arr.push(retorno);
+      } 
+    }
+    return arr;
   }
 
 }

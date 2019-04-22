@@ -3,27 +3,39 @@
   <div class="cabecalho">
     <h1> Busque por tipos de endereços: </h1>
 
-    <!--
-    <input MatInput [(ngModel)]="nomeFilterTxt" />
+    <div class="filter-group">
 
-    <mat-select color="primary" #statusFilter (change)="filterStatusChange($event)" >
-        <mat-option *ngFor="let item of statusFilterOpts" [value]="item.value" >
-            {{item.viewValue}}
-        </mat-option>
-    </mat-select>
-
-    <button mat-button color="primary" (click)="verTodosOsRetistros()"> Ver tudo </button>
-    <button mat-button color="primary" (click)="filtrar()" >Filtrar Dados</button>
-    <button mat-button color="primary" (click)="limparFiltro()" > Limpar Filtro</button>
-    -->
+        <div class="filter-data">
+  
+          <div class="form-group custom-group">
+              <input id="nomeFilter" placeholder="Nome" class="form-control" [(ngModel)]="nomeFilterTxt" />
+          </div>
+  
+          <mat-form-field class="form-group">
+              <mat-label> Status:  </mat-label>
+              <mat-select color="primary" #statusFilter (selectionChange)="filterStatusChange($event.value)" >
+                  <mat-option *ngFor="let item of statusFilterOpts" [value]="item.value" >
+                      {{item.viewValue}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+  
+        </div>
+  
+        <div class="filter-buttons">
+          <button mat-raised-button color="primary" (click)="filtrar()" >Filtrar</button>
+          <button mat-raised-button color="primary" (click)="verTodosOsRetistros()"> Ver tudo </button>
+        </div>
+  
+      </div>
 
   </div>
 
-  <button style="position: relative; float: right;" mat-button (click)="exportar()" title="Exportar para excell"> 
+  <button [hidden]="hideTable" style="position: relative; float: right;" mat-button (click)="exportar()" title="Exportar para excell"> 
     <img style="max-width: 25px; max-height: 25px;" src="../../../../assets/imgs/excell-icon.png" />
   </button>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table [hidden]="hideTable" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Nome </th>

@@ -94,6 +94,7 @@ export class ListComponent implements OnInit {
 
   verTodosOsRetistros(){
     this.hideTable = false;
+    this.dataSourceFiltrado = undefined;
     this.addrSvc.getAll().subscribe(
       (response) => {
         this.dataSource = response;
@@ -107,9 +108,6 @@ export class ListComponent implements OnInit {
     console.log(this.dataSource);
 
     let $this = this;
-    if(this.dataSourceFiltrado) {
-      this.limparFiltro();
-    }
     this.hideTable = true;
 
     if(this.nomeFilterTxt != ""){
@@ -154,12 +152,6 @@ export class ListComponent implements OnInit {
     console.log("Data Source final:");
     console.log(this.dataSource);
     this.hideTable = false;
-  }
-
-  limparFiltro(){
-    this.dataSource = this.dataSourceBkp;
-    this.dataSourceFiltrado = undefined;
-    this.table.renderRows();
   }
 
   loopWithReturn(array: any, callback: any){

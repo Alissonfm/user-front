@@ -13,7 +13,7 @@
 
         <mat-form-field class="form-group">
             <mat-label> Status:  </mat-label>
-            <mat-select color="primary" #statusFilter (change)="filterStatusChange($event)" >
+            <mat-select color="primary" #statusFilter (selectionChange)="filterStatusChange($event.value)" >
                 <mat-option *ngFor="let item of statusFilterOpts" [value]="item.value" >
                     {{item.viewValue}}
                 </mat-option>
@@ -23,9 +23,8 @@
       </div>
 
       <div class="filter-buttons">
+        <button mat-raised-button color="primary" (click)="filtrar()" >Filtrar </button>
         <button mat-raised-button color="primary" (click)="verTodosOsRetistros()"> Ver tudo </button>
-        <button mat-raised-button color="primary" (click)="filtrar()" >Filtrar Dados</button>
-        <button mat-raised-button color="primary" (click)="limparFiltro()" > Limpar Filtro</button>
       </div>
 
     </div>
