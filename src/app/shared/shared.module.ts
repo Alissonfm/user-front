@@ -1,11 +1,98 @@
 import { NgModule } from '@angular/core';
-import { CoreModule } from '@core/core.module';
-import { AdminComponent } from './components/admin/admin.component';
+import { ListComponent } from './components/list/list.component';
+import { DialogEditorComponent } from './components/dialog-editor/dialog-editor.component';
+import {
+	MatButtonModule,
+	MatFormFieldModule,
+	MatInputModule,
+	MatCheckboxModule,
+	MatSelectModule,
+	MatDatepickerModule,
+	MatNativeDateModule,
+	MatTableModule,
+	MatProgressSpinnerModule,
+	MatTooltipModule,
+	MatTabsModule,
+	MatMenuModule,
+	MatAutocompleteModule,
+	MatRadioModule,
+	MatIconModule,
+	MatProgressBarModule,
+	MatCardModule,
+	MatPaginatorModule,
+	MatSortModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+  MatOptionModule
+} from '@angular/material';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [ListComponent, DialogEditorComponent, HeaderComponent],
   imports: [
-    CoreModule 
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatAutocompleteModule,
+    MatRadioModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+		CommonModule,
+		FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    //BrowserAnimationsModule,
+  ],
+  exports: [
+    ListComponent, 
+    DialogEditorComponent,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatAutocompleteModule,
+    MatRadioModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+		CommonModule,
+		FormsModule,
+    ReactiveFormsModule,
+    HeaderComponent,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    HeaderComponent
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

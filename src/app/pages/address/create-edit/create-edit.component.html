@@ -1,0 +1,66 @@
+<div class="content-container">
+  
+  <h1>Preencha os campos para {{ getTitle() }}:</h1>
+
+  <form [formGroup]="novoEndereco" (ngSubmit)="onSubmit(novoEndereco)">
+
+    <div class="form-group">
+        <label for="name">Nome:</label>
+        <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+            <div *ngIf="f.name.errors.required">Digite o nome.</div>
+        </div>
+    </div>
+
+    <mat-form-field>
+        <mat-label> Está ativo?:</mat-label>
+        <mat-select formControlName="active" [ngClass]="{ 'is-invalid': submitted && f.active.errors }" >
+            <mat-option *ngFor="let item of addresOpts" value="{{item.value}}" >
+                {{item.viewValue}}
+            </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && f.active.errors" class="invalid-feedback">
+            <div *ngIf="f.active.errors.required"> Selecione uma das opções </div>
+        </div>
+    </mat-form-field>
+
+    <div class="form-group">
+        <label for="streetName"> Rua / Av </label>
+        <input type="streetName" formControlName="streetName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.streetName.errors }" />
+        <div *ngIf="submitted && f.streetName.errors" class="invalid-feedback">
+            <div *ngIf="f.streetName.errors.required">Digite a Rua/ Avenida.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="number"> Número </label>
+        <input type="number" formControlName="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.number.errors }" />
+        <div *ngIf="submitted && f.number.errors" class="invalid-feedback">
+            <div *ngIf="f.number.errors.required">Informe o Número.</div>
+        </div>
+    </div>
+  
+    <div class="form-group">
+        <label for="description">Descrição</label>
+        <input type="description" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+            <div *ngIf="f.description.errors.required"> Informe a descrição.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="complement">Complemento</label>
+        <input type="complement" formControlName="complement" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.complement.errors }" />
+        <div *ngIf="submitted && f.complement.errors" class="invalid-feedback">
+            <div *ngIf="f.complement.errors.required">Informe o Complemento.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" [disabled]="loading" class="btn btn-primary"> {{ getTitle() }} </button>
+        <img *ngIf="loading" class="pl-2" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+</form>  
+</div>

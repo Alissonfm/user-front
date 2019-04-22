@@ -5,7 +5,12 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { User } from '@shared/models/user.model';
 import { Role } from '@shared/enums/role.enum';
 
+@Injectable()
+export class FakeBackendInterceptor {
 
+}
+
+/*
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -82,7 +87,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
     }
 }
-
+*/
 export let fakeBackendProvider = {
     // use fake backend in place of Http service for backend-less development
     provide: HTTP_INTERCEPTORS,

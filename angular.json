@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "app-guard-angular-7": {
+    "user-front": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/app-guard-angular-7",
+            "outputPath": "dist/user-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app-guard-angular-7:build"
+            "browserTarget": "user-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app-guard-angular-7:build:production"
+              "browserTarget": "user-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app-guard-angular-7:build"
+            "browserTarget": "user-front:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "app-guard-angular-7-e2e": {
+    "user-front-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "app-guard-angular-7:serve"
+            "devServerTarget": "user-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "app-guard-angular-7:serve:production"
+              "devServerTarget": "user-front:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "app-guard-angular-7"
+  "defaultProject": "user-front"
 }

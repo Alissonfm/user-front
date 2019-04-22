@@ -12,6 +12,63 @@ import { AuthenticationService } from '@shared/service/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
+    loginForm: FormGroup;
+    loading = false;
+    submitted = false;
+    returnUrl: string;
+    error: string = "";
+
+    constructor(
+        private formBuilder: FormBuilder,
+        private route: ActivatedRoute,
+        private router: Router,
+        private authSvc: AuthenticationService
+    ) {}
+
+    ngOnInit() {
+        this.loginForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
+    }
+
+    // convenience getter for easy access to form fields
+    get f() { return this.loginForm.controls; }
+
+    onSubmit() {
+        let $this = this;
+        this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.loginForm.invalid) {
+            return;
+        }
+
+        this.authSvc.login(
+            this.f.username.value, 
+            this.f.password.value,
+            ()=>{
+                console.log("Well logged?");
+                console.log($this.authSvc.getMessageStatus());
+                $this.router.navigate(['home']);
+            },
+            ()=>{
+                $this.error = $this.authSvc.getMessageStatus();
+            }
+        );
+
+    }
+}
+
+
+/*
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
+
   loginForm: FormGroup;
     loading = false;
     submitted = false;
@@ -65,3 +122,4 @@ export class LoginComponent implements OnInit {
     }
 
 }
+*/

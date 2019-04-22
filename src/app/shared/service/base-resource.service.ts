@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injector } from '@angular/core';
 
 import { BaseResourceModel } from '@shared/models/base-resource.model';
+import { Observable } from 'rxjs';
 
 export abstract class BaseResourceService<T extends BaseResourceModel> {
   protected http: HttpClient;
@@ -15,6 +16,20 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
   }
 
   getAll() {
-      return this.http.get<T[]>(`${this.apiPath}`);
+    return this.http.get<T[]>(`${this.apiPath}/all`);
   }
+
+  save(data: any): Observable<T> {
+    return this.http.post<T>(`${this.apiPath}/save`, data);
+  }
+
+  delete(data: any): void {
+    console.log(data);
+    this.http.delete<T>(`${this.apiPath}/${data}`).subscribe();
+  }
+
+  edit(data: any) {
+    this.http.put<T>(`${this.apiPath}/update`, data);
+  }
+
 }
