@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { TypeAddressComponent } from './type-address.component';
 import { ListComponent } from './list/list.component';
 import { CreateEditComponent } from './create-edit/create-edit.component';
-import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared/shared.module';
 
 const routes: Routes = [
   {
-    path: 'tipo-enderecos',
+    path: 'tipos-enderecos',
     component: TypeAddressComponent,
     children: [
       {

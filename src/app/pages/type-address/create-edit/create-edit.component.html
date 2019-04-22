@@ -19,8 +19,8 @@
                   {{item.viewValue}}
               </mat-option>
           </mat-select>
-          <div *ngIf="submitted && f.number.active" class="invalid-feedback">
-              <div *ngIf="f.number.active.required">Escolha uma das opções.</div>
+          <div *ngIf="submitted && f.active.errors" class="invalid-feedback">
+              <div *ngIf="f.active.errors.required">Escolha uma das opções.</div>
           </div>
       </mat-form-field>
     
