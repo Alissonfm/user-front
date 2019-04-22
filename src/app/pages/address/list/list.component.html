@@ -8,14 +8,18 @@
       <div class="filter-data">
 
         <div class="form-group custom-group">
-            <input id="nomeFilter" placeholder="Nome" class="form-control" [(ngModel)]="nomeFilterTxt" />
+            <input id="nomeFilter" placeholder="Nome da rua" class="form-control" [(ngModel)]="nomeFilterTxt" />
+        </div>
+        
+        <div class="form-group custom-group">
+            <input id="numberFilter" type="number" placeholder="Número" class="form-control" [(ngModel)]="numberFilterTxt" />
         </div>
 
         <mat-form-field class="form-group">
             <mat-label> Status:  </mat-label>
             <mat-select color="primary" #statusFilter (selectionChange)="filterStatusChange($event.value)" >
-                <mat-option *ngFor="let item of statusFilterOpts" [value]="item.value" >
-                    {{item.viewValue}}
+                <mat-option *ngFor="let item of addresTypeFilterOpts" [value]="item.name" >
+                    {{item.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

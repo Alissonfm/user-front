@@ -25,12 +25,12 @@
 
     </div>
 
-  <button style="position: relative; float: right;" mat-button (click)="exportar()" title="Exportar para excell"> 
+  <button [hidden]="hideTable" style="position: relative; float: right;" mat-button (click)="exportar()" title="Exportar para excell"> 
     <img style="max-width: 25px; max-height: 25px;" src="../../../../assets/imgs/excell-icon.png" />
   </button>
 
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table [hidden]="hideTable" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
  
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Nome </th>

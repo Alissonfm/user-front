@@ -7,6 +7,8 @@ import { ExportServiceService } from '@app/shared/service/export-service.service
 import { Address } from '@shared/models/address.model';
 import { DataSource } from '@angular/cdk/table';
 import { MatInput } from "@angular/material";
+import { TypeAddressComponent } from '@app/pages/type-address/type-address.component';
+import { TypeAddressService } from '@app/shared/service/type-address.service';
 
 @Component({
   selector: 'app-list',
@@ -32,13 +34,10 @@ export class ListComponent implements OnInit {
     'delete'
   ];
 
-  statusFilterOpts = [
-    { value: true, viewValue: "Todos"},
-    { value: true, viewValue: "Ativos"},
-    { value: false, viewValue: "Desativados"}
-  ];
+  addresTypeFilterOpts: any;
 
   nomeFilterTxt = "";
+  numberFilterTxt = "";
   statusfilterTxt = "Todos";
 
   filtros: any;
@@ -49,6 +48,7 @@ export class ListComponent implements OnInit {
 
   constructor(
     public addrSvc: AddressService,
+    public taSvc: TypeAddressService,
     public transpSvc: LocalService,
     public exportSvc: ExportServiceService,
     public route: Router
@@ -61,6 +61,11 @@ export class ListComponent implements OnInit {
         this.dataSource = response;
       }
     );
+    this.taSvc.getAll().subscribe(
+      (response) => {
+        this.addresTypeFilterOpts = response;
+      }
+    )
   }
 
   editar(data){
@@ -107,6 +112,8 @@ export class ListComponent implements OnInit {
     console.log("Data source inicial:");
     console.log(this.dataSource);
 
+    console.log(this.nomeFilterTxt);
+
     let $this = this;
     this.hideTable = true;
 
@@ -126,11 +133,11 @@ export class ListComponent implements OnInit {
     console.log("Filtro de nome");
     console.log(this.dataSourceFiltrado);
 
-    if(this.statusfilterTxt != "Todos"){
+    if(this.numberFilterTxt != ""){
       this.dataSourceFiltrado = this.loopWithReturn(
         this.dataSource, 
         (element) => {
-          if( element.active == $this.statusfilterTxt ){
+          if( element.number == $this.numberFilterTxt ){
             return element;
           }
           return undefined;
@@ -138,7 +145,22 @@ export class ListComponent implements OnInit {
       );
     }
 
-    console.log("Filtro de status");
+    console.log("Filtro de numero");
+    console.log(this.dataSourceFiltrado);
+
+    if(this.statusfilterTxt != "Todos"){
+      this.dataSourceFiltrado = this.loopWithReturn(
+        this.dataSource, 
+        (element) => {
+          if( element.typeAddress.name == $this.statusfilterTxt ){
+            return element;
+          }
+          return undefined;
+        }
+      );
+    }
+
+    console.log("Filtro de Tipo de endereco");
     console.log(this.dataSourceFiltrado);
 
     if(this.dataSourceFiltrado != undefined ) {
@@ -148,6 +170,10 @@ export class ListComponent implements OnInit {
       this.dataSource = this.dataSourceBkp;
       this.table.renderRows();
     }
+
+    this.nomeFilterTxt = "";
+    this.numberFilterTxt = "";
+    this.statusfilterTxt = "Todos";
 
     console.log("Data Source final:");
     console.log(this.dataSource);
