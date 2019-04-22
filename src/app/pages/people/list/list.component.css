@@ -16,6 +16,10 @@ table th {
     color: white;
 }
 
+table th, table td {
+    white-space: normal;
+}
+
 table * {
     text-align: center;
 }

@@ -3,6 +3,8 @@ import { AddressService } from '@app/shared/service/address.service';
 import { Address } from '@shared/models/address.model'; 
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocalService } from '@app/shared/service/local.service';
+import { TypeAddress } from '@app/shared/models/type-address.model';
+import { TypeAddressService } from '@app/shared/service/type-address.service';
 
 @Component({
   selector: 'app-create-edit',
@@ -15,10 +17,12 @@ export class CreateEditComponent implements OnInit {
   tipoSelecionado: string;
   currentAddress: Address;
   novoEndereco: FormGroup;
+  tiposEndereco: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private addresSvc: AddressService,
+    private taSvc: TypeAddressService,
     private transpSvc: LocalService
   ) {
     this.addresOpts = [
@@ -26,13 +30,29 @@ export class CreateEditComponent implements OnInit {
       { value: false, viewValue: "Não"}
     ];
 
+    this.taSvc.getAll().subscribe(
+      (response) => {
+        this.tiposEndereco = response.filter((item) => {
+          console.log(item);
+          if (item.active){
+            return item;
+          }
+        });
+      },
+      (response) => {
+        console.log("Erro ao pegar tipos de endereço:");
+        console.log(response);
+      } 
+    )
+
     this.novoEndereco = this.formBuilder.group({
       name: ['', Validators.required],
       active: ['', Validators.required],
       streetName: ['', Validators.required],
       number: ['', Validators.required],
       description: ['', Validators.required],
-      complement: ['', Validators.required]
+      complement: ['', Validators.required],
+      typeAddress: ['', Validators.required]
     });
 
   }
@@ -47,7 +67,8 @@ export class CreateEditComponent implements OnInit {
         streetName: [campos.streetName, Validators.required],
         number: [campos.number, Validators.required],
         description: [campos.description, Validators.required],
-        complement: [campos.complement, Validators.required]
+        complement: [campos.complement, Validators.required],
+        typeAddress: [campos.typeAddress, Validators.required]
       });
 
     } else {
@@ -58,26 +79,42 @@ export class CreateEditComponent implements OnInit {
         streetName: ['', Validators.required],
         number: ['', Validators.required],
         description: ['', Validators.required],
-        complement: ['', Validators.required]
+        complement: ['', Validators.required],
+        typeAddress: ['', Validators.required]
       });
     }
   }
 
   getTitle(){
     if (this.transpSvc.data){
-      return "editar Pessoa";
+      return "editar Endereço";
     }
-    return "adicionar Pessoa";
+    return "adicionar Endereço";
   }
 
   onSubmit({value}){
     console.log(value);
 
-    this.addresSvc.save(value).subscribe(
-      (response) => {
-        console.log(response);
-      }
-    )
+    if(this.transpSvc.data){
+      this.addresSvc.edit(value).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (response) => {
+          console.log(response);
+        }
+      )
+    } else {
+      this.addresSvc.save(value).subscribe(
+        (response) => {
+          console.log(response);
+        }
+      )
+    }
+  }
+
+  trocaTypeAddress(e){
+    console.log(e);
   }
 
 }

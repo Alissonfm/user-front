@@ -4,7 +4,10 @@
       <h1> Busque por pessoas cadastradas: </h1>
     </div>
 
-    <button mat-button (click)="exportar()"> Exportar para Excell </button>
+  <button style="position: relative; float: right;" mat-button (click)="exportar()" title="Exportar para excell"> 
+    <img style="max-width: 25px; max-height: 25px;" src="../../../../assets/imgs/excell-icon.png" />
+  </button>
+
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
  
@@ -53,14 +56,19 @@
     <td mat-cell *matCellDef="let item"> {{item.employesAmount}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef> Endereço: </th>
+    <td mat-cell *matCellDef="let item"> {{item?.address?.name}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="edit">
-    <th mat-header-cell class="'max-width-35px'" *matHeaderCellDef> Editar </th>
-    <td mat-cell class="'max-width-35px'" *matCellDef="let item"> <button mat-button (click)="editar(item)" > <img class="icon" src="../../../../assets/imgs/edit-icon.png" /> </button> </td>
+    <th mat-header-cell *matHeaderCellDef> Editar </th>
+    <td mat-cell *matCellDef="let item"> <button mat-button (click)="editar(item)" > <img class="icon" src="../../../../assets/imgs/edit-icon.png" /> </button> </td>
   </ng-container>
 
   <ng-container matColumnDef="delete">
-    <th mat-header-cell [ngClass]="'max-width-35px'" *matHeaderCellDef> Deletar </th>
-    <td mat-cell [ngClass]="'max-width-35px'" *matCellDef="let item"> <button mat-button (click)="deletar(item.id)" > <img class="icon" src="../../../../assets/imgs/trash-icon.png" /> </button> </td>
+    <th mat-header-cell *matHeaderCellDef> Deletar </th>
+    <td mat-cell  *matCellDef="let item"> <button mat-button (click)="deletar(item.id)" > <img class="icon" src="../../../../assets/imgs/trash-icon.png" /> </button> </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

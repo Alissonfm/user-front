@@ -23,6 +23,7 @@ export class ListComponent implements OnInit {
     'cellPhone',
     'birth',
     'employesAmount',
+    'address',
     'edit',
     'delete'
   ];

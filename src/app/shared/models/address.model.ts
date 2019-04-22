@@ -1,3 +1,5 @@
+import { TypeAddress } from './type-address.model';
+
 export class Address {
     id: number;
     name: string;
@@ -6,8 +8,5 @@ export class Address {
     number: number;
     description: string;
     complement: string;
-
-    toString(){
-        return this.name+": "+this.streetName+", "+this.number;
-    }
+    typeAddress: TypeAddress
 } 

@@ -28,8 +28,8 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     return this.http.delete<T>(`${this.apiPath}/${data}`);
   }
 
-  edit(data: any) {
-    this.http.put<T>(`${this.apiPath}/update`, data);
+  edit(data: any): Observable<T> {
+    return this.http.put<T>(`${this.apiPath}/update`, data);
   }
 
 }

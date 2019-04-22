@@ -1,3 +1,5 @@
+import { Address } from './address.model';
+
 export class People {
     id: number;
     name: string;
@@ -9,4 +11,5 @@ export class People {
     cellPhone: string;
     birth: string;
     employesAmount: number;
+    address: number;
   }
