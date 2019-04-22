@@ -92,7 +92,7 @@ import { HeaderComponent } from './components/header/header.component';
     MatFormFieldModule,
     MatSelectModule,
     MatOptionModule,
-    HeaderComponent
+    HeaderComponent,
   ]
 })
 export class SharedModule {}

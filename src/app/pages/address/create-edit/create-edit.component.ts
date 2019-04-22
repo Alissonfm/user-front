@@ -25,6 +25,16 @@ export class CreateEditComponent implements OnInit {
       { value: true, viewValue: "Sim"},
       { value: false, viewValue: "Não"}
     ];
+
+    this.novoEndereco = this.formBuilder.group({
+      name: ['', Validators.required],
+      active: ['', Validators.required],
+      streetName: ['', Validators.required],
+      number: ['', Validators.required],
+      description: ['', Validators.required],
+      complement: ['', Validators.required]
+    });
+
   }
 
   ngOnInit() {

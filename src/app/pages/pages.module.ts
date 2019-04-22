@@ -8,7 +8,33 @@ import { LocalService } from '@app/shared/service/local.service';
 import { AddressModule } from './address/address.module';
 import { TypeAddressModule } from './type-address/type-address.module';
 
+const routes: Routes = [
+  {
+    path: '',
+    component: PagesComponent,
+    children: [
+      {
+        path: 'home',
+        component: HomeComponent
+      },
+      {
+        path: 'enderecos',
+        component: AddressModule
+      },
+      {
+        path: 'pessoas',
+        component: PeopleModule
+      },
+      {
+        path: 'tipos-enderecos',
+        component: TypeAddressModule
+      },
 
+    ]
+  },
+];
+
+/*
 const routes: Routes = [
   {
     path: '',
@@ -34,6 +60,8 @@ const routes: Routes = [
     ]
   },
 ];
+*/
+
 
 @NgModule({
   declarations: [

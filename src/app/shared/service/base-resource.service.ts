@@ -23,9 +23,9 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
     return this.http.post<T>(`${this.apiPath}/save`, data);
   }
 
-  delete(data: any): void {
+  delete(data: any): Observable<T> {
     console.log(data);
-    this.http.delete<T>(`${this.apiPath}/${data}`).subscribe();
+    return this.http.delete<T>(`${this.apiPath}/${data}`);
   }
 
   edit(data: any) {

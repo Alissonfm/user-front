@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
             ()=>{
                 console.log("Well logged?");
                 console.log($this.authSvc.getMessageStatus());
-                $this.router.navigate(['home']);
+                $this.router.navigate(['app/home']);
             },
             ()=>{
                 $this.error = $this.authSvc.getMessageStatus();

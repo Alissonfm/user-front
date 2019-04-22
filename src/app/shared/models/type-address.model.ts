@@ -3,7 +3,7 @@ export class TypeAddress {
     name: string;
     active: boolean;
 
-    getStatus(){
+    get getStatus() {
         if(this.active){
             return "Ativo";
         }

@@ -24,7 +24,7 @@ export class CreateEditComponent implements OnInit {
     ]
 
     this.novoTypeAddress = this.formBuilder.group({
-      number: ['', Validators.required],
+      name: ['', Validators.required],
       active: ['', Validators.required]
     });
   }
@@ -34,13 +34,13 @@ export class CreateEditComponent implements OnInit {
     if(this.transpSvc.data) {
       let campos = this.transpSvc.data;
       this.novoTypeAddress = this.formBuilder.group({
-        number: [campos.number, Validators.required],
+        name: [campos.name, Validators.required],
         active: [campos.active, Validators.required]
       });
 
     } else {
       this.novoTypeAddress = this.formBuilder.group({
-        number: ['', Validators.required],
+        name: ['', Validators.required],
         active: ['', Validators.required]
       });
     }

@@ -30,7 +30,7 @@ const routes: Routes = [
   declarations: [ListComponent, CreateEditComponent, AddressComponent],
   imports: [
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forRoot(routes)
   ]
 })
-export class AddressModule { }
+export class AddressModule {}

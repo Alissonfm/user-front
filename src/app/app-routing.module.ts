@@ -11,6 +11,18 @@ import { TypeAddressModule } from './pages/type-address/type-address.module';
 
 const API_ROUTES: Routes = [
   {
+    path: '', 
+    component: LoginComponent
+  },
+  {
+    path: 'app',
+    component: PagesModule,
+  }
+];
+
+/*
+const API_ROUTES: Routes = [
+  {
     path: 'login', 
     component: LoginComponent
   },
@@ -37,52 +49,8 @@ const API_ROUTES: Routes = [
     ]
   }
 ];
-
-/*
-const API_ROUTES: Routes = [
-  {
-    path: '', 
-    component: LoginComponent
-  },
-  {
-    path: 'home', 
-    component: HomeComponent
-  },
-  {
-    path: 'app',
-    component: PagesComponent,
-    children: [
-      {
-        path: 'pessoas',
-        loadChildren: './people/people.module#PeopleModule'
-      },
-      {
-        path: 'enderecos',
-        loadChildren: './address/address.module#AddressModule'
-      }
-    ]
-  }
-];
 */
 
-/*
-const API_ROUTES: Routes = [
-  {
-    path: '', 
-    component: HomeComponent
-  },
-  { 
-    path: 'login', 
-    component: LoginComponent 
-  },
-  { 
-    path: 'admin', 
-    component: AdminComponent, 
-    canActivate: [AuthGuard], 
-    data: { roles: [Role.Admin] } 
-  }
-];
-*/
 
 @NgModule({
   imports: [PagesModule, PeopleModule, AddressModule, TypeAddressModule, RouterModule.forRoot(API_ROUTES)],
